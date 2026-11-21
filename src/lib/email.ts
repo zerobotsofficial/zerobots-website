@@ -287,7 +287,10 @@ Reply directly to this email to respond to ${data.name} (${data.email}).
     html: htmlContent,
   });
 
-  console.log(`[Email Dispatched] Message sent successfully to ${COMPANY_EMAIL}. MessageId: ${info.messageId}`);
+  // Server-side delivery log — visible in Vercel Function logs / Node stdout
+  if (process.env.NODE_ENV !== "production") {
+    process.stdout.write(`[Email Dispatched] id=${info.messageId} to=${COMPANY_EMAIL}\n`);
+  }
   return {
     sent: true,
     messageId: info.messageId,
