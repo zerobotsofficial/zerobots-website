@@ -50,15 +50,12 @@ export async function POST(request: NextRequest) {
     // 2. Generate Unique Enquiry Reference ID
     const referenceId = `ZB-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
-    // 3. Log Structured Enquiry
-    console.log(`[ZeroBots Enquiry Received] Reference: ${referenceId}`, {
-      name: trimmedName,
-      email: trimmedEmail,
-      organization: trimmedOrg || "Not specified",
-      inquiryType: selectedType,
-      messageLength: trimmedMessage.length,
-      receivedAt: new Date().toISOString(),
-    });
+    // 3. Log Structured Enquiry (server-side only — visible in Vercel/Node logs, not browser)
+    if (process.env.NODE_ENV !== "production") {
+      process.stdout.write(
+        `[ZeroBots Enquiry] ref=${referenceId} from=${trimmedEmail} type=${selectedType} len=${trimmedMessage.length}\n`
+      );
+    }
 
     // 4. Send Email Notification to zerobots.official@gmail.com
     let emailStatus = { sent: false };
