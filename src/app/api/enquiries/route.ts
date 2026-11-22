@@ -22,8 +22,8 @@ export async function POST(request: NextRequest) {
     const trimmedOrg = typeof organization === "string" ? organization.trim() : "";
     const trimmedMessage = typeof message === "string" ? message.trim() : "";
     const selectedType =
-      inquiryType === "Service Related Inquiry"
-        ? "Service Related Inquiry"
+      typeof inquiryType === "string" && inquiryType.trim()
+        ? inquiryType.trim()
         : "General Technical Inquiry";
 
     if (!trimmedName || trimmedName.length < 2) {

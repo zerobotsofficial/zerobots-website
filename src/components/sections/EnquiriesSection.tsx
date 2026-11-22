@@ -6,15 +6,21 @@ import { FadeInSection } from "@/components/layout/FadeInSection";
 
 const subjects = [
   { id: "hardware", label: "Blob Hardware Inquiry" },
+  { id: "software", label: "Software & Digital Architecture" },
   { id: "partnership", label: "Partnership / Investment" },
   { id: "other", label: "Other / General" }
 ];
 
 export function EnquiriesSection() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("hardware");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+  const [referenceId, setReferenceId] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState("software");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,11 +36,45 @@ export function EnquiriesSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call for demonstration
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setSubmitStatus("success");
-    setTimeout(() => setSubmitStatus("idle"), 5000);
+    setStatusMessage("");
+    setSubmitStatus("idle");
+
+    const subjectObj = subjects.find((s) => s.id === selectedSubject);
+    const inquiryType = subjectObj ? subjectObj.label : "General Technical Inquiry";
+
+    try {
+      const res = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          inquiryType,
+          message: message.trim(),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to transmit signal. Please try again.");
+      }
+
+      setReferenceId(data.referenceId || "");
+      setStatusMessage(data.message || "Signal received successfully. Our engineers will respond shortly.");
+      setSubmitStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setTimeout(() => setSubmitStatus("idle"), 8000);
+    } catch (err: unknown) {
+      setSubmitStatus("error");
+      setStatusMessage(err instanceof Error ? err.message : "Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -61,11 +101,25 @@ export function EnquiriesSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-xs font-mono uppercase tracking-widest text-slate-400 pl-2">Name</label>
-                <input required type="text" className="theme-field w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400/50 transition-colors" placeholder="John Doe" />
+                <input
+                  required
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="theme-field w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400/50 transition-colors"
+                  placeholder="John Doe"
+                />
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-mono uppercase tracking-widest text-slate-400 pl-2">Email</label>
-                <input required type="email" className="theme-field w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400/50 transition-colors" placeholder="john@company.com" />
+                <input
+                  required
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="theme-field w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400/50 transition-colors"
+                  placeholder="john@company.com"
+                />
               </div>
             </div>
 
@@ -114,7 +168,14 @@ export function EnquiriesSection() {
 
             <div className="space-y-2">
               <label className="text-xs font-mono uppercase tracking-widest text-slate-400 pl-2">Message</label>
-              <textarea required rows={5} className="theme-field w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400/50 transition-colors resize-none" placeholder="How can we collaborate?"></textarea>
+              <textarea
+                required
+                rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="theme-field w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-400/50 transition-colors resize-none"
+                placeholder="How can we collaborate? (Min. 10 characters)"
+              ></textarea>
             </div>
 
             <div className="pt-4 flex items-center justify-end">
@@ -134,9 +195,21 @@ export function EnquiriesSection() {
             </div>
 
             {submitStatus === "success" && (
-              <p className="text-emerald-400 text-sm text-center font-mono mt-4 animate-in fade-in">
-                Signal received successfully. Our engineers will respond shortly.
-              </p>
+              <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-200 text-sm text-center font-mono mt-4 animate-in fade-in">
+                <p className="font-semibold">{statusMessage}</p>
+                {referenceId && (
+                  <p className="text-xs text-emerald-300/80 mt-1">
+                    Reference ID: <span className="font-bold text-white tracking-wider">{referenceId}</span>
+                  </p>
+                )}
+              </div>
+            )}
+
+            {submitStatus === "error" && (
+              <div className="p-4 rounded-2xl bg-red-950/40 border border-red-500/40 text-red-200 text-sm text-center font-mono mt-4 animate-in fade-in">
+                <p className="font-semibold">Transmission Error</p>
+                <p className="text-xs text-red-300 mt-1">{statusMessage}</p>
+              </div>
             )}
           </form>
         </div>
