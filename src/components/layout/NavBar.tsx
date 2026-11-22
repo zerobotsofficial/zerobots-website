@@ -74,20 +74,22 @@ export const NavBar = () => {
             }`}
         >
           {/* LOGO */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 group transition-transform hover:scale-105"
-            aria-label="ZeroBots Home"
-          >
-            <ZeroBotsLogo size="sm" useBrandFont={true} />
-          </Link>
+          <div className="flex-1 flex items-center justify-start">
+            <Link
+              href="/"
+              className="flex items-center gap-2 group transition-transform hover:scale-105"
+              aria-label="ZeroBots Home"
+            >
+              <ZeroBotsLogo size="sm" useBrandFont={true} />
+            </Link>
+          </div>
 
           {/* DESKTOP NAVIGATION LINKS */}
-          <div className={`hidden md:flex items-center gap-1 lg:gap-2 p-1.5 rounded-full ${scrolled ? '' : 'bg-canvas/40 backdrop-blur-md border border-white/5'}`}>
+          <div className={`hidden md:flex items-center justify-center gap-1 sm:gap-1.5 p-1.5 rounded-full ${scrolled ? '' : 'bg-canvas/40 backdrop-blur-md border border-white/5'}`}>
             <Link
               href="#home"
               onClick={(e) => handleNavClick(e, "home")}
-              className={`px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "home"
+              className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "home"
                   ? "text-white bg-white/10"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
@@ -98,7 +100,7 @@ export const NavBar = () => {
             <Link
               href="#about"
               onClick={(e) => handleNavClick(e, "about")}
-              className={`px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "about"
+              className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "about"
                   ? "text-white bg-white/10"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
@@ -115,7 +117,7 @@ export const NavBar = () => {
               <button
                 type="button"
                 onClick={() => setIsProductsDropdownOpen(!isProductsDropdownOpen)}
-                className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all cursor-pointer ${isProductsActive
+                className={`flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all cursor-pointer ${isProductsActive
                     ? "text-white bg-white/10"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
                   }`}
@@ -155,7 +157,7 @@ export const NavBar = () => {
                         </div>
                         <div>
                           <div className="text-sm font-medium text-white group-hover:text-cyan-200 flex items-center gap-1 transition-colors">
-                            Hardware Products
+                            Our Products
                             <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                           </div>
                           <p className="text-xs text-slate-400 font-light leading-relaxed mt-1">
@@ -172,34 +174,23 @@ export const NavBar = () => {
             <Link
               href="#careers"
               onClick={(e) => handleNavClick(e, "careers")}
-              className={`px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "careers"
+              className={`px-4 sm:px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "careers"
                   ? "text-white bg-white/10"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
             >
               Careers
             </Link>
-
-            <Link
-              href="#enquiries"
-              onClick={(e) => handleNavClick(e, "enquiries")}
-              className={`px-4 py-2 rounded-full text-sm font-medium tracking-wide transition-all ${activeSection === "enquiries"
-                  ? "text-white bg-white/10"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
-                }`}
-            >
-              Enquiries
-            </Link>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3">
             <ThemeToggle />
             <Link
               href="#enquiries"
               onClick={(e) => handleNavClick(e, "enquiries")}
               className="hidden sm:inline-flex relative items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest text-black bg-white hover:bg-slate-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] cursor-pointer cyber-btn"
             >
-              <span>Connect</span>
+              <span>Enquiries</span>
             </Link>
             <button
               type="button"
@@ -268,7 +259,7 @@ export const NavBar = () => {
                     >
                       <Cpu className="w-5 h-5 text-slate-400" />
                       <div>
-                        <div className="font-medium">Hardware Products</div>
+                        <div className="font-medium">Our Products</div>
                         <div className="text-[11px] text-slate-500 font-light mt-0.5">Blob Desktop Companion</div>
                       </div>
                     </Link>
@@ -285,22 +276,13 @@ export const NavBar = () => {
                 Careers
               </Link>
 
-              <Link
-                href="#enquiries"
-                onClick={(e) => handleNavClick(e, "enquiries")}
-                className={`p-4 rounded-2xl text-base font-medium transition-colors ${activeSection === "enquiries" ? "bg-white/10 text-white font-semibold" : "text-slate-300 hover:bg-white/5"
-                  }`}
-              >
-                Enquiries
-              </Link>
-
               <div className="pt-4 mt-2 border-t border-white/10">
                 <Link
                   href="#enquiries"
                   onClick={(e) => handleNavClick(e, "enquiries")}
                   className="w-full py-4 rounded-2xl bg-white text-black font-semibold text-center text-sm uppercase tracking-widest shadow-[0_0_20px_rgba(255,255,255,0.1)] block"
                 >
-                  Initiate Enquiry
+                  Enquiries
                 </Link>
               </div>
             </div>

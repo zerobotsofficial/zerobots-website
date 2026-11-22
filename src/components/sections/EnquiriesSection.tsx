@@ -6,7 +6,6 @@ import { FadeInSection } from "@/components/layout/FadeInSection";
 
 const subjects = [
   { id: "hardware", label: "Blob Hardware Inquiry" },
-  { id: "software", label: "Software & Digital Architecture" },
   { id: "partnership", label: "Partnership / Investment" },
   { id: "other", label: "Other / General" }
 ];

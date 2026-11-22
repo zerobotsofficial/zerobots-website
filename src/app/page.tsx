@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Cpu, Network, Sparkles } from "lucide-react";
 import { ZeroBotsLogo } from "@/components/graphic/ZeroBotsLogo";
 import { Footer } from "@/components/layout/Footer";
@@ -25,16 +24,6 @@ export default function HomePage() {
             Designing intelligent, indigenous autonomous systems and 
             <span className="text-white font-medium"> premium digital architectures.</span>
           </h1>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-4 w-full">
-            <Link
-              href="#hardware"
-              className="px-8 py-4 rounded-full text-sm font-semibold tracking-widest uppercase text-black bg-white hover:bg-slate-200 transition-all shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)] flex items-center gap-3 group cyber-btn"
-            >
-              <span>Hardware</span>
-              <Cpu className="w-4 h-4 text-black group-hover:rotate-12 transition-transform" />
-            </Link>
-          </div>
 
           {/* Telemetry Footer line */}
           <div className="flex flex-wrap items-center justify-center gap-8 mt-24 pt-8 border-t border-white/5 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
