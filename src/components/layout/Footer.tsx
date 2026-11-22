@@ -81,23 +81,23 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-canvas/95 backdrop-blur-xl border-t border-white/10 text-slate-300 relative z-20 overflow-hidden">
+    <footer className="w-full bg-canvas/95 backdrop-blur-xl border-t border-white/10 text-slate-300 relative z-20 overflow-hidden font-sans">
       {/* Main Footer Container */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8 sm:pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-10 sm:pb-12 border-b border-white/10">
 
           {/* COLUMN 1: Brand & Elevator Pitch (Cols 1-4) */}
           <div className="lg:col-span-4 flex flex-col items-start gap-4">
-            <Link href="/" className="group inline-block" aria-label="ZeroBots Home">
-              <ZeroBotsLogo size="sm" />
+            <Link href="/" className="flex items-center gap-2 group transition-transform hover:scale-105 inline-block" aria-label="ZeroBots Home">
+              <ZeroBotsLogo size="sm" useBrandFont={true} />
             </Link>
 
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm mt-1 font-light">
+            <p className="text-sm text-slate-400 leading-relaxed max-w-sm mt-1 font-normal">
               ZeroBots is an emerging robotics and digital engineering startup developing Blob, our intelligent desktop companion robot, alongside modern digital software solutions.
             </p>
 
             {/* Systems Status Indicator */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-300 mt-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium tracking-wide text-slate-300 mt-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>SYSTEMS ONLINE</span>
             </div>
@@ -143,40 +143,40 @@ export const Footer = () => {
 
           {/* COLUMN 2: Hardware Products (Cols 5-7) */}
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <span className="text-xs font-mono uppercase tracking-widest text-white font-medium border-b border-white/10 pb-2 inline-block">
+            <span className="text-xs uppercase tracking-widest text-white font-medium border-b border-white/10 pb-2 inline-block">
               Products
             </span>
             <ul className="space-y-3 text-sm mt-2">
               <li>
                 <Link
                   href="/#hardware"
-                  className="text-slate-400 hover:text-white transition-all font-light"
+                  className="text-sm font-medium tracking-wide text-slate-400 hover:text-white transition-all"
                 >
-                  Hardware Products
+                  Our Products
                 </Link>
               </li>
               <li>
                 <Link
                   href="/#hardware"
-                  className="text-slate-400 hover:text-white inline-flex items-center gap-2 transition-all font-light"
+                  className="text-sm font-medium tracking-wide text-slate-400 hover:text-white inline-flex items-center gap-2 transition-all"
                 >
                   <span>Blob Companion</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-slate-300 border border-white/10">Soon</span>
+                  <span className="text-[10px] font-medium tracking-wide px-2 py-0.5 rounded-full bg-white/10 text-slate-300 border border-white/10">Soon</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* COLUMN 4: Company & Contact (Cols 10-12) */}
+          {/* COLUMN 3: Company & Contact (Cols 10-12) */}
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <span className="text-xs font-mono uppercase tracking-widest text-white font-medium border-b border-white/10 pb-2 inline-block">
+            <span className="text-xs uppercase tracking-widest text-white font-medium border-b border-white/10 pb-2 inline-block">
               Company &amp; Contact
             </span>
             <ul className="space-y-3 text-sm mt-2">
               <li>
                 <Link
                   href="/#about"
-                  className="text-slate-400 hover:text-white transition-all font-light"
+                  className="text-sm font-medium tracking-wide text-slate-400 hover:text-white transition-all"
                 >
                   About ZeroBots
                 </Link>
@@ -185,7 +185,7 @@ export const Footer = () => {
                 <Link
                   href="/#enquiries"
                   onClick={scrollToEnquiryBox}
-                  className="text-slate-400 hover:text-white transition-all font-light"
+                  className="text-sm font-medium tracking-wide text-slate-400 hover:text-white transition-all"
                 >
                   Contact &amp; Inquiries
                 </Link>
@@ -194,7 +194,7 @@ export const Footer = () => {
                 <Link
                   href="/#enquiries"
                   onClick={scrollToEnquiryBox}
-                  className="text-slate-400 hover:text-white transition-all font-light"
+                  className="text-sm font-medium tracking-wide text-slate-400 hover:text-white transition-all"
                 >
                   Inquire About Blob
                 </Link>
@@ -202,7 +202,7 @@ export const Footer = () => {
               <li>
                 <Link
                   href="/#careers"
-                  className="text-slate-400 hover:text-white transition-all font-light"
+                  className="text-sm font-medium tracking-wide text-slate-400 hover:text-white transition-all"
                 >
                   Careers
                 </Link>
@@ -213,7 +213,7 @@ export const Footer = () => {
         </div>
 
         {/* BOTTOM BAR: Copyright, Legal & Back to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 font-mono text-center sm:text-left">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 tracking-wide text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 gap-y-2">
             <span>&copy; {new Date().getFullYear()} ZeroBots LLP. All rights reserved.</span>
             <span className="text-slate-700 hidden sm:inline">|</span>
@@ -228,7 +228,7 @@ export const Footer = () => {
           <button
             type="button"
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer"
+            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer font-medium tracking-wide"
             aria-label="Scroll back to top"
           >
             <span>Back to Top</span>

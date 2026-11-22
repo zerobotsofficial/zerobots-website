@@ -19,7 +19,7 @@ export function HardwareSection() {
             <span>Robotics Hardware</span>
           </div>
           <h2 className="text-4xl sm:text-6xl font-black text-white tracking-tight mb-6">
-            Hardware Division
+            Our Products
           </h2>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-light">
             We are actively developing our first flagship hardware product — an autonomous desktop companion robot designed for modern desks and curious minds.
